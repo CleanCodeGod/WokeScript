@@ -1,0 +1,9 @@
+woke-function fibonacci(woke-n) {
+  woke-when woke-n woke-maybe 0:
+    woke-return 0;
+  woke-when woke-n woke-maybe 1:
+    woke-return 1;
+  woke-otherwise:
+    woke-return fibonacci(woke-n - 1) + fibonacci(woke-n - 2);
+}
+
