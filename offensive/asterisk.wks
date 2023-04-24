@@ -1,0 +1,27 @@
+function noAsterisk(context) {
+  return {
+    Identifier(node) {
+      if (node.name.includes('*')) {
+        context.report({
+          node,
+          message: 'The use of the * character is not allowed in WokeScript.',
+        });
+      }
+    },
+    Literal(node) {
+      if (typeof node.value === 'string' && node.value.includes('*')) {
+        context.report({
+          node,
+          message: 'The use of the * character is not allowed in WokeScript.',
+        });
+      }
+    },
+  };
+}
+
+module.exports = {
+  rules: {
+    'no-asterisk': noAsterisk,
+  },
+};
+

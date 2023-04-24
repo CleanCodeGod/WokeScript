@@ -1,0 +1,31 @@
+const genderPronouns = ['he', 'she', 'him', 'her'];
+
+function noGenderPronouns(context) {
+  return {
+    Identifier(node) {
+      if (genderPronouns.includes(node.name.toLowerCase())) {
+        context.report({
+          node,
+          message: 'Gender pronoun used in variable name: {{ name }}',
+          data: { name: node.name },
+        });
+      }
+    },
+    Literal(node) {
+      if (typeof node.value === 'string' && genderPronouns.some((pronoun) => node.value.toLowerCase().includes(pronoun))) {
+        context.report({
+          node,
+          message: 'Gender pronoun used in string: {{ value }}',
+          data: { value: node.value },
+        });
+      }
+    },
+  };
+}
+
+module.exports = {
+  rules: {
+    'no-gender-pronouns': noGenderPronouns,
+  },
+};
+
