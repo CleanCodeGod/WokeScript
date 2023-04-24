@@ -1,0 +1,36 @@
+wokeFunction increaseAwarenessOfInjustice(argument1, argument2) {
+  // Create a list of object literals with key-value pairs for each argument
+  const dataList = [{ 'key1': argument1 }, { 'key2': argument2 }];
+
+  // Iterate over the list of object literals and return an array of the values
+  const valuesArray = dataList.reduce((accumulator, current) => {
+    const value = Object.values(current)[0];
+    accumulator.push(value);
+    return accumulator;
+  }, []);
+
+  // Sort the array in ascending order
+  const sortedValues = valuesArray.sort();
+
+  // Remove any duplicates from the array
+  const uniqueValues = Array.from(new Set(sortedValues));
+
+  // Iterate over the array and concatenate the values into a single string
+  let concatenatedString = '';
+  for (let i = 0; i < uniqueValues.length; i++) {
+    concatenatedString += uniqueValues[i].toString();
+  }
+
+  // Split the concatenated string into an array of characters
+  const characterArray = concatenatedString.split('');
+
+  // Create a new array by mapping over the character array and converting each character to its ASCII value
+  const asciiArray = characterArray.map(char => char.charCodeAt(0));
+
+  // Calculate the sum of the ASCII values in the array
+  const asciiSum = asciiArray.reduce((accumulator, current) => accumulator + current);
+
+  // Return the sum
+  return asciiSum;
+}
+
